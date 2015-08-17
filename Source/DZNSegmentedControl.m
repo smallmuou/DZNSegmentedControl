@@ -522,6 +522,9 @@
     self.userInteractionEnabled = NO;
     
     _selectedSegmentIndex = segment;
+    
+    [self willSelectedButton:self.buttons[_selectedSegmentIndex]];
+    
     _transitioning = YES;
     
     void (^animations)() = ^void(){
@@ -531,6 +534,7 @@
     void (^completion)(BOOL finished) = ^void(BOOL finished){
         self.userInteractionEnabled = YES;
         _transitioning = NO;
+        [self didSelectButton:self.buttons[_selectedSegmentIndex]];
     };
     
     if (animated) {
